@@ -15,9 +15,26 @@
 .video_youtube{
     width: 100%;
 }
+.video_youtube_preview{
+    position: relative;
+    width: 100%;
+}
 .video_youtube_video{
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
     border-radius: 10px;
+}
+.video_preview_overlay{
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    padding: 6px 10px;
+    background-color: rgba(0, 0, 0, 0.72);
+    color: white;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .video_youtubeAbout{
@@ -231,13 +248,19 @@
     display: flex;
     gap: 15px;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 .video_suggetion_thumbnail{
     width: 168px;
     height: 94px;
+    flex: 0 0 168px;
 }
 .video_suggetion_thumbnail_img{
-    width: inherit;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
 }
 .video_suggetions_About{
     display: flex;
@@ -252,4 +275,21 @@
 .video_suggetions_About_Profile{
     color: #ffffff9c;
     font-size: 12px;
+}
+
+@media (max-width: 980px) {
+    .video{
+        flex-direction: column;
+        padding: 20px 14px;
+    }
+
+    .videoSuggestions{
+        max-width: none;
+        padding: 20px 0;
+    }
+
+    .youtube_video_ProfileBlock{
+        gap: 14px;
+        flex-direction: column;
+    }
 }

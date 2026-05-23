@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './homePage.css'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import demoVideos from '../../data/demoVideos';
 const HomePage = ({ sideNavbar }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/allVideo').then(res => {
-      console.log(res.data.videos)
-      setData(res.data.videos);
-    }).catch(err => {
-      console.log(err);
-    })
+    setData(demoVideos);
   }, [])
 
-  const options = ["All", "Twenty20 Cricket", "Music", "Live", "Mixes", "Gaming", "Debates", "Coke Studio Pakistan", "Democracy", "Pakistani dramas", "Comedy", "Pakistani dramas", "Comedy", "Pakistani dramas", "Comedy",];
+  const options = ["All", "MrBeast", "Football", "Gaming", "Comedy", "Tech", "Music", "Sports", "Science", "Live", "Podcasts", "Recently uploaded"];
 
   return (
     <div className={sideNavbar ? 'homePage' : 'fullHomePage'}>
@@ -37,9 +32,24 @@ const HomePage = ({ sideNavbar }) => {
         {
           data?.map((item, ind) => {
             return (
-              <Link to={`/watch/${item._id}`} className="youtube_Video">
+              <Link to={`/watch/${item.id}`} className="youtube_Video" key={item.id}>
 
-                {/* Please watch the video for the code} */}
+                <div className="youtube_thumbnailBox">
+                  <img src={item.thumbnail} className="youtube_thumbnailPic" alt={item.title} />
+                  <div className="youtube_timingThumbnail">{item.duration}</div>
+                </div>
+
+                <div className="youtubeTitleBox">
+                  <div className="youtubeTitleBoxProfile">
+                    <img src={item.profilePic} className="youtube_thumbnail_Profile" alt={item.channelName} />
+                  </div>
+
+                  <div className="youtubeTitleBox_Title">
+                    <div className="youtube_videoTitle">{item.title}</div>
+                    <div className="youtube_channelName">{item.channelName}</div>
+                    <div className="youtubeVideo_views">{item.views} . {item.posted}</div>
+                  </div>
+                </div>
 
               </Link>
             );
